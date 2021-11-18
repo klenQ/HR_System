@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.klen.hrsys.dao.DepartmentDao">
 
-    <select id="search" resultType="com.klen.hrsys.entity.Department">
+    <select id="search" resultMap="com.klen.hrsys.entity.Department">
         select d.*
         from department as d
         order by d.id

@@ -15,7 +15,7 @@
         }
         #container  #search .align{
             float:left;
-            margin-right:8px;
+            margin-right:8px
         }
         #container #search input{
             width:160px;
