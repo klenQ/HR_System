@@ -21,6 +21,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     DepartmentDao depDao;
     @Autowired
     EmployeeDao empDao;
+
     @Override
     public List<Department> search() {
         List<Department> list = depDao.search();

@@ -13,6 +13,8 @@
         <option value="$PROJECT_DIR$/hrsys_ssm_iframe/pom.xml" />
         <option value="$PROJECT_DIR$/hrsys_ssm_ajax/pom.xml" />
         <option value="$PROJECT_DIR$/hrsys_springboot/pom.xml" />
+        <option value="$PROJECT_DIR$/hrsys_thymeleaf/pom.xml" />
+        <option value="$PROJECT_DIR$/hrsys_jpa/pom.xml" />
       </list>
     </option>
   </component>

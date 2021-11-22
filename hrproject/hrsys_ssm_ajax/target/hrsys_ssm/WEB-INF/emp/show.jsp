@@ -10,20 +10,24 @@
             width: 700px;
             margin: 10px auto;
         }
-        #container #search{
+
+        #container #search {
             overflow: hidden;
         }
-        #container  #search .align{
-            float:left;
-            margin-right:8px;
+
+        #container #search .align {
+            float: left;
+            margin-right: 8px;
         }
-        #container #search input{
-            width:160px;
+
+        #container #search input {
+            width: 160px;
         }
+
         #container #data {
             clear: both;
             width: 700px;
-            margin:10px 0;
+            margin: 10px 0;
         }
 
 
@@ -65,7 +69,7 @@
         </div>
 
     </form>
-    <table id="data" border="1" >
+    <table id="data" border="1">
         <tr>
             <th>编号</th>
             <th>名字</th>

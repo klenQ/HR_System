@@ -6,15 +6,15 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- 加载db.properties-->
-    <context:property-placeholder location="classpath:db.properties" />
+    <context:property-placeholder location="classpath:db.properties"/>
     <!-- 扫描包，将标注Spring注解的类自动转化对象，同时完成Bean的注入 -->
     <context:component-scan base-package="com.klen.hrsys"/>
     <!-- 启动对@AspectJ注解的支持 -->
     <aop:aspectj-autoproxy/>
 
-<!--    配置数据源, 使用dcpb数据库连接池-->
+    <!--    配置数据源, 使用dcpb数据库连接池-->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-        destroy-method="close">
+          destroy-method="close">
         <property name="driverClassName" value="${jdbc.driver}"/>
         <property name="url" value="${jdbc.url}"/>
         <property name="username" value="${jdbc.username}"/>
@@ -23,32 +23,32 @@
         <property name="maxIdle" value="20"/>
     </bean>
 
-<!--    配置sqlSessionFactory-->
+    <!--    配置sqlSessionFactory-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="mapperLocations" value="classpath:mapper/*.xml"/>
     </bean>
 
-<!--    mapper scanner-->
+    <!--    mapper scanner-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.klen.hrsys.dao"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
-<!--事务管理器-->
+    <!--事务管理器-->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-<!--    通知-->
+    <!--    通知-->
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
-<!--            传播行为-->
+            <!--            传播行为-->
             <tx:method name="delete*" propagation="REQUIRED"/>
             <tx:method name="add*" propagation="REQUIRED"/>
             <tx:method name="update*" propagation="REQUIRED"/>
             <tx:method name="search*" propagation="SUPPORTS" read-only="true"/>
         </tx:attributes>
     </tx:advice>
-<!--    aop-->
+    <!--    aop-->
     <aop:config>
         <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.klen.hrsys.service.impl.*.*(..))"/>
     </aop:config>

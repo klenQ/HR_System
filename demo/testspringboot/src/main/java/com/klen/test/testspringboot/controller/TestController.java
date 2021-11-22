@@ -14,7 +14,7 @@ public class TestController {
 
     @RequestMapping("test")
     @ResponseBody
-    public void test(){
+    public void test() {
 
         System.out.println("Hello World");
     }

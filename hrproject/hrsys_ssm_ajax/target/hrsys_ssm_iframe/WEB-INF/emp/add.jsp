@@ -33,10 +33,10 @@
         <div class="align">
             <label>性别</label>
             <label class="radio-inline">
-            <input type="radio" value="男" name="gender"/>男
+                <input type="radio" value="男" name="gender"/>男
             </label>
             <label class="radio-inline">
-            <input type="radio" value="女" name="gender"/>女
+                <input type="radio" value="女" name="gender"/>女
             </label>
         </div>
         <div class="align">

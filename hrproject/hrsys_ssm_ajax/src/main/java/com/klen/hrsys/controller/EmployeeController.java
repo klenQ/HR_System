@@ -29,20 +29,21 @@ public class EmployeeController {
     DepartmentService departmentService;
 
     @RequestMapping("search")
-    public ModelAndView search(Employee condition){
+    public ModelAndView search(Employee condition) {
         ModelAndView mv = new ModelAndView("emp/show");
 
         List<Employee> list = employeeService.search(condition);
         List<Department> depList = departmentService.search();
-        mv.addObject("list",list);
-        mv.addObject("depList",depList);
-        mv.addObject("c",condition);
+        mv.addObject("list", list);
+        mv.addObject("depList", depList);
+        mv.addObject("c", condition);
         return mv;
     }
+
     //search by condition ajax
     @RequestMapping("searchByCondition")
     @ResponseBody
-    public List<Employee> searchByCondition(Employee condition){
+    public List<Employee> searchByCondition(Employee condition) {
         System.out.println(condition);
         return employeeService.search(condition);
     }
@@ -60,6 +61,7 @@ public class EmployeeController {
         boolean flag = employeeService.add(emp);
         return "redirect:search";
     }
+
     @RequestMapping("showUpdate")
     public ModelAndView showUpdate(Integer id) {
         Employee emp = employeeService.searchById(id);

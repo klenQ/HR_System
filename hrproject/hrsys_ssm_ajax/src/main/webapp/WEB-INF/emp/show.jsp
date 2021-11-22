@@ -32,7 +32,7 @@
                 $("#modal").modal("show");
             })
             var id = -1;
-            $(document).on("click",".data",function () {
+            $(document).on("click", ".data", function () {
                 $(".data").removeClass("selected");
                 $(this).addClass("selected");
                 id = $(this).data("id");
@@ -51,25 +51,25 @@
                     alert("请选中数据");
                 }
             });
-            $("#search").click(function (){
+            $("#search").click(function () {
                 $.ajax({
-                   url:"searchByCondition",
-                   type:"post",
-                   data: $("#searchForm").serialize(),
+                    url: "searchByCondition",
+                    type: "post",
+                    data: $("#searchForm").serialize(),
                     dataType: "json",
-                   success:function(data){
-                       for (var i = 0; i < data.length; i++) {
-                           $(".data").remove();
-                           var tr = "<tr class='data' data-id="+ data[i].id+">"+
-                               "<td>" + data[i].number+
-                               "</td><td>" + data[i].name +
-                               "</td><td>" + data[i].gender +
-                               "</td><td>" + data[i].age +
-                               "</td><td>" + data[i].dep.name +
-                               "</td></tr>";
-                           $("table").append(tr);
-                       }
-                   }
+                    success: function (data) {
+                        for (var i = 0; i < data.length; i++) {
+                            $(".data").remove();
+                            var tr = "<tr class='data' data-id=" + data[i].id + ">" +
+                                "<td>" + data[i].number +
+                                "</td><td>" + data[i].name +
+                                "</td><td>" + data[i].gender +
+                                "</td><td>" + data[i].age +
+                                "</td><td>" + data[i].dep.name +
+                                "</td></tr>";
+                            $("table").append(tr);
+                        }
+                    }
                 });
             });
         })
@@ -143,7 +143,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"
-                            aria-hidden="true">×</button>
+                            aria-hidden="true">×
+                    </button>
                     <h4 class="modal-title" id="modalLabel"></h4>
                 </div>
                 <div class="modal-body" id="modalBody">

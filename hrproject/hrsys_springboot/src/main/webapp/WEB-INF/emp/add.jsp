@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-         pageEncoding="utf-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+         pageEncoding="utf-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page isELIgnored="false" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -35,8 +35,8 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">性别</label>
         <div class="col-sm-10">
-            <input type="radio" value="男" name="gender" />男<input type="radio"
-                                                                  value="女" name="gender" />女
+            <input type="radio" value="男" name="gender"/>男<input type="radio"
+                                                                 value="女" name="gender"/>女
         </div>
     </div>
     <div class="form-group">
@@ -51,7 +51,7 @@
         <div class="col-sm-10">
             <select class="form-control" name="dep.id">
                 <c:forEach var="dep" items="${depList }">
-                    <option value="${dep.id }" >${dep.name }</option>
+                    <option value="${dep.id }">${dep.name }</option>
                 </c:forEach>
             </select>
         </div>

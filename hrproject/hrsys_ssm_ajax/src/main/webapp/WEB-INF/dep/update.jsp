@@ -10,6 +10,7 @@
             width: 600px;
             margin: 10px auto;
         }
+
         #container form .align {
             margin: 8px 0;
         }
@@ -17,7 +18,7 @@
 </head>
 <body>
 <div id="container">
-    <form  action="update">
+    <form action="update">
         <input type="hidden" name="id" value="${dep.id}">
         <div class="align">
             <label>编号</label>

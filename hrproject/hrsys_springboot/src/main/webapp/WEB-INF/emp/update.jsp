@@ -59,7 +59,8 @@
             <div class="col-sm-10">
                 <select class="form-control" name="dep.id">
                     <c:forEach var="dep" items="${depList }">
-                        <option value="${dep.id }"  <c:if test="${emp.dep.id==dep.id}"> selected</c:if> >${dep.name }</option>
+                        <option value="${dep.id }"  <c:if
+                                test="${emp.dep.id==dep.id}"> selected</c:if> >${dep.name }</option>
                     </c:forEach>
                 </select>
             </div>

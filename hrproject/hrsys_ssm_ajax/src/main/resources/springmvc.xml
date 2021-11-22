@@ -13,7 +13,7 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-<!--    静态资源扫描-->
+    <!--    静态资源扫描-->
     <mvc:resources mapping="/bootstrap/**" location="/bootstrap/"/>
     <mvc:resources mapping="/js/**" location="/js/"/>
 </beans>

@@ -11,9 +11,13 @@ import java.util.List;
  */
 public interface DepartmentDao {
     List<Department> search();
+
     Department searchById(int id);
+
     int update(Department department);
+
     int add(Department department);
+
     int delete(int id);
 
 }

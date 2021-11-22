@@ -10,6 +10,7 @@
             width: 400px;
             margin: 10px auto;
         }
+
         #container form .align {
             margin: 8px 0;
         }

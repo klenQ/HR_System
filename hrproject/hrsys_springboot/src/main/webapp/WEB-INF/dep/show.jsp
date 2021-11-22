@@ -10,6 +10,7 @@
             width: 400px;
             margin: 10px auto;
         }
+
         #container #data {
             clear: both;
             width: 400px;

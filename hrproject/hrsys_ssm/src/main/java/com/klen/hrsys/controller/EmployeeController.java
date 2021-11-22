@@ -26,16 +26,17 @@ public class EmployeeController {
     DepartmentService departmentService;
 
     @RequestMapping("search")
-    public ModelAndView search(Employee condition){
+    public ModelAndView search(Employee condition) {
         ModelAndView mv = new ModelAndView("emp/show");
 
         List<Employee> list = employeeService.search(condition);
         List<Department> depList = departmentService.search();
-        mv.addObject("list",list);
-        mv.addObject("depList",depList);
-        mv.addObject("c",condition);
+        mv.addObject("list", list);
+        mv.addObject("depList", depList);
+        mv.addObject("c", condition);
         return mv;
     }
+
     @RequestMapping("showAdd")
     public ModelAndView showAdd() {
         ModelAndView mv = new ModelAndView("emp/add");
@@ -49,6 +50,7 @@ public class EmployeeController {
         boolean flag = employeeService.add(emp);
         return "redirect:search";
     }
+
     @RequestMapping("showUpdate")
     public ModelAndView showUpdate(Integer id) {
         Employee emp = employeeService.searchById(id);

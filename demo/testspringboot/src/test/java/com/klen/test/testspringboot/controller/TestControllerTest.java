@@ -18,7 +18,7 @@ class TestControllerTest {
     private TestController testController;
 
     @Test
-    void testTest(){
+    void testTest() {
         testController.test();
     }
 }
