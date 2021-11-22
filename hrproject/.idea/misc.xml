@@ -15,6 +15,7 @@
         <option value="$PROJECT_DIR$/hrsys_springboot/pom.xml" />
         <option value="$PROJECT_DIR$/hrsys_thymeleaf/pom.xml" />
         <option value="$PROJECT_DIR$/hrsys_jpa/pom.xml" />
+        <option value="$PROJECT_DIR$/hrsys_cache_redis/pom.xml" />
       </list>
     </option>
   </component>
