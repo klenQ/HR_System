@@ -16,6 +16,11 @@
         <option value="$PROJECT_DIR$/hrsys_thymeleaf/pom.xml" />
         <option value="$PROJECT_DIR$/hrsys_jpa/pom.xml" />
         <option value="$PROJECT_DIR$/hrsys_cache_redis/pom.xml" />
+        <option value="$PROJECT_DIR$/hrsys_restful_security/pom.xml" />
+        <option value="$PROJECT_DIR$/hrsys_security1/pom.xml" />
+        <option value="$PROJECT_DIR$/hrsys_security/pom.xml" />
+        <option value="$PROJECT_DIR$/hrsys_security2/pom.xml" />
+        <option value="$PROJECT_DIR$/hrsys_security3/pom.xml" />
       </list>
     </option>
   </component>
