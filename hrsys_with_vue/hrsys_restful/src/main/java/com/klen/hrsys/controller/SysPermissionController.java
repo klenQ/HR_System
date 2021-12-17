@@ -5,59 +5,40 @@ import com.klen.hrsys.service.SysPermissionService;
 import com.klen.hrsys.entity.SysPermission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("sysPermission")
 public class SysPermissionController {
 
     @Autowired
     SysPermissionService sysPermissionService;
 
-    @RequestMapping("search")
-    public ModelAndView search() {
-        ModelAndView mv = new ModelAndView("sysPermission/show");
-        List<SysPermission> list = sysPermissionService.search();
-        mv.addObject("list", list);
-
-        return mv;
-
+    @GetMapping
+    public List<SysPermission> search() {
+        return sysPermissionService.search();
     }
 
-    @RequestMapping("showAdd")
-    public String showAdd() {
-        return "sysPermission/add";
-
+    @GetMapping("{id}")
+    public SysPermission searchById(@PathVariable Integer id){
+        return sysPermissionService.searchById(id);
     }
 
-    @RequestMapping("add")
-    public String add(SysPermission sysPermission) {
-        boolean flag = sysPermissionService.add(sysPermission);
-        return "redirect:search";
-
+    @PostMapping
+    public boolean add(@RequestBody SysPermission sysPermission) {
+        return sysPermissionService.add(sysPermission);
     }
 
-    @RequestMapping("showUpdate")
-    public ModelAndView showUpdate(Integer id) {
-        ModelAndView mv = new ModelAndView("sysPermission/update");
-        SysPermission sysPermission = sysPermissionService.searchById(id);
-        mv.addObject("sysPermission", sysPermission);
-        return mv;
-
+    @PutMapping
+    public boolean update(SysPermission sysPermission) {
+        return sysPermissionService.update(sysPermission);
     }
 
-    @RequestMapping("update")
-    public String update(SysPermission sysPermission) {
-        boolean flag = sysPermissionService.update(sysPermission);
-        return "redirect:search";
-    }
-
-    @RequestMapping("delete")
-    public String delete(Integer id) {
-        boolean flag = sysPermissionService.delete(id);
-        return "redirect:search";
+    @DeleteMapping("{id}")
+    public boolean delete(@PathVariable Integer id) {
+        return sysPermissionService.delete(id);
     }
 }

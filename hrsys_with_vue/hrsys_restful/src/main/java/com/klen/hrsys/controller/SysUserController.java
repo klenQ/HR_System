@@ -6,7 +6,7 @@ import com.klen.hrsys.service.SysRoleService;
 import com.klen.hrsys.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -18,55 +18,29 @@ public class SysUserController {
     @Autowired
     SysUserService sysUserService;
 
-    @Autowired
-    SysRoleService sysRoleService;
 
-    @RequestMapping("search")
-    public ModelAndView search() {
-        ModelAndView mv = new ModelAndView("sysUser/show");
-        List<SysUser> list = sysUserService.search();
-        mv.addObject("list", list);
-
-        return mv;
-
+    @GetMapping
+    public List<SysUser> search() {
+        return sysUserService.search();
     }
 
-    @RequestMapping("showAdd")
-    public ModelAndView showAdd() {
-        ModelAndView mv = new ModelAndView("sysUser/add");
-        List<SysRole> roles = sysRoleService.search();
-        mv.addObject("roles", roles);
-        return mv;
-
+    @GetMapping("{id}")
+    public SysUser searchById(@PathVariable Integer id){
+        return sysUserService.searchById(id);
     }
 
-    @RequestMapping("add")
-    public String add(SysUser sysUser) {
-        boolean flag = sysUserService.add(sysUser);
-        return "redirect:search";
-
+    @PostMapping
+    public boolean add(@RequestBody SysUser sysUser) {
+        return sysUserService.add(sysUser);
     }
 
-    @RequestMapping("showUpdate")
-    public ModelAndView showUpdate(Integer id) {
-        ModelAndView mv = new ModelAndView("sysUser/update");
-        SysUser sysUser = sysUserService.searchById(id);
-        List<SysRole> roles = sysRoleService.search();
-        mv.addObject("sysUser", sysUser);
-        mv.addObject("roles", roles);
-        return mv;
-
+    @PutMapping
+    public boolean update(@RequestBody SysUser sysUser) {
+        return sysUserService.update(sysUser);
     }
 
-    @RequestMapping("update")
-    public String update(SysUser sysUser) {
-        boolean flag = sysUserService.update(sysUser);
-        return "redirect:search";
-    }
-
-    @RequestMapping("delete")
-    public String delete(Integer id) {
-        boolean flag = sysUserService.delete(id);
-        return "redirect:search";
+    @DeleteMapping("{id}")
+    public boolean delete(@PathVariable Integer id) {
+        return sysUserService.delete(id);
     }
 }

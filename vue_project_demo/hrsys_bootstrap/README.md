@@ -1,4 +1,4 @@
-# hrsys
+# hrsys_bootstrap
 
 ## Project setup
 ```

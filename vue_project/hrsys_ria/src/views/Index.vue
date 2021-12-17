@@ -1,42 +1,41 @@
-﻿<template>
+<template>
   <el-container>
     <el-header style="height:120px">
       <div id="top">
-        <div id="logo">人事管理系统</div>
+        <div id="logo">Alan人事管理系统</div>
       </div>
     </el-header>
     <el-container>
       <el-aside width="200px">
-          <el-menu
-              default-active="2"
-              class="el-menu-vertical-demo"
-              @open="handleOpen"
-              @close="handleClose">
-
-            <el-menu-item>
-              <i class="el-icon-s-home"></i>
-              <span slot="title">欢迎界面</span>
-            </el-menu-item>
-            <el-menu-item>
-              <i class="el-icon-s-custom"></i>
-              <router-link to="/emp/show">员工管理</router-link>
-            </el-menu-item>
-            <el-menu-item>
-              <i class="el-icon-s-management"></i>
-              <span slot="title">部门管理</span>
-            </el-menu-item>
-            <el-submenu>
-              <template slot="title"><i class="el-icon-setting"></i>权限管理</template>
-              <el-menu-item-group>
-                <el-menu-item>用户管理</el-menu-item>
-                <el-menu-item>角色管理</el-menu-item>
-                <el-menu-item>权限管理</el-menu-item>
-              </el-menu-item-group>
-            </el-submenu>
-          </el-menu>
+        <el-menu @select="selectMenu">
+          <el-menu-item><i class="el-icon-s-home"></i>欢迎页面</el-menu-item>
+          <el-menu-item index="employee"><i class="el-icon-s-custom"></i>
+            员工管理
+          </el-menu-item>
+          <el-menu-item index="department"><i class="el-icon-s-management"></i>部门管理</el-menu-item>
+          <el-submenu index="permission_management">
+            <template slot="title"><i class="el-icon-setting"></i>权限管理</template>
+            <el-menu-item-group>
+              <el-menu-item index="sysUser">用户管理</el-menu-item>
+              <el-menu-item index="sysRole">角色管理</el-menu-item>
+              <el-menu-item index="sysPermission">权限管理</el-menu-item>
+            </el-menu-item-group>
+          </el-submenu>
+        </el-menu>
       </el-aside>
       <el-main>
-        <router-view/>
+        <el-tabs v-model="selectedTab" type="card" closable @tab-remove="removeTab">
+          <el-tab-pane
+              v-for="key in tabs"
+              :key="modules[key].name"
+              :label="modules[key].title"
+              :name="modules[key].name"
+          >
+            <component :is="modules[key].component"></component>
+          </el-tab-pane>
+
+        </el-tabs>
+
       </el-main>
     </el-container>
     <el-footer style="height:120px">Footer</el-footer>
@@ -44,27 +43,76 @@
 </template>
 
 <script>
+import Employee from '@/components/employee/Employee.vue'
+import Department from '@/components/Department.vue'
+import SysUser from '@/components/SysUser.vue'
+import SysRole from '@/components/SysRole.vue'
+import SysPermission from '@/components/SysPermission.vue'
+
 export default {
   name: "Index",
+  data() {
+    return {
+      selectedTab: null,
+      tabs: ["employee","department","sysUser","sysRole","sysPermission"],
+      modules: {
+        employee: {
+          title: '员工管理',
+          name: 'employee',
+          component: Employee
+        },
+        department: {
+          title: '部门管理',
+          name: 'department',
+          component: Department
+        }
+        ,
+        sysUser: {
+          title: '用户管理',
+          name: 'sysUser',
+          component: SysUser
+        }
+        ,
+        sysRole: {
+          title: '角色管理',
+          name: 'sysRole',
+          component: SysRole
+        }
+        ,
+        sysPermission: {
+          title: '权限管理',
+          name: 'sysPermission',
+          component: SysPermission
+        }
+      }
+    }
+  },
+
   methods: {
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath);
+    selectMenu(index) {
+      if (this.tabs.indexOf(index) < 0) {
+        this.tabs.push(index);
+      }
+      this.selectedTab = index;
     },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath);
+    removeTab(name) {
+      let index = this.tabs.indexOf(name);
+      this.tabs.splice(index, 1)
+
+      this.selectedTab = this.tabs[0];
     }
   }
 }
 </script>
+
 <style scoped>
 .el-header, .el-footer {
-  background-color: #B3C0D1;
+  background-color: lightskyblue;
   color: #333;
   text-align: center;
 }
 
 .el-aside {
-  background-color: #D3DCE6;
   color: #333;
   text-align: center;
   height: 400px;

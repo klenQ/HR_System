@@ -2,11 +2,13 @@ package com.klen.hrsys.controller;
 
 import com.klen.hrsys.entity.SysPermission;
 import com.klen.hrsys.entity.SysRole;
+import com.klen.hrsys.entity.SysUser;
 import com.klen.hrsys.service.SysPermissionService;
 import com.klen.hrsys.service.SysRoleService;
+import com.sun.xml.internal.messaging.saaj.packaging.mime.util.BEncoderStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -18,55 +20,28 @@ public class SysRoleController {
     @Autowired
     SysRoleService sysRoleService;
 
-    @Autowired
-    SysPermissionService sysPermissionService;
-
-    @RequestMapping("search")
-    public ModelAndView search() {
-        ModelAndView mv = new ModelAndView("sysRole/show");
-        List<SysRole> list = sysRoleService.search();
-        mv.addObject("list", list);
-
-        return mv;
-
+    @GetMapping
+    public List<SysRole> search() {
+        return sysRoleService.search();
     }
 
-    @RequestMapping("showAdd")
-    public ModelAndView showAdd() {
-        ModelAndView mv = new ModelAndView("sysRole/add");
-        List<SysPermission> permissions = sysPermissionService.search();
-        mv.addObject("permissions", permissions);
-        return mv;
-
+    @GetMapping("{id}")
+    public SysRole searchById(@PathVariable Integer id){
+        return sysRoleService.searchById(id);
     }
 
-    @RequestMapping("add")
-    public String add(SysRole sysRole) {
-        boolean flag = sysRoleService.add(sysRole);
-        return "redirect:search";
-
+    @PostMapping
+    public boolean add(@RequestBody SysRole sysRole) {
+        return sysRoleService.add(sysRole);
     }
 
-    @RequestMapping("showUpdate")
-    public ModelAndView showUpdate(Integer id) {
-        ModelAndView mv = new ModelAndView("sysRole/update");
-        SysRole sysRole = sysRoleService.searchById(id);
-        List<SysPermission> permissions = sysPermissionService.search();
-        mv.addObject("sysRole", sysRole);
-        mv.addObject("permissions", permissions);
-        return mv;
-
+    @PutMapping
+    public boolean update(@RequestBody SysRole sysRole) {
+        return sysRoleService.update(sysRole);
     }
 
-    @RequestMapping("update")
-    public String update(SysRole sysRole) {
-        boolean flag = sysRoleService.update(sysRole);
-        return "redirect:search";
-    }
-
-    @RequestMapping("delete")
-    public String delete(Integer id) {
-        boolean flag = sysRoleService.delete(id);
-        return "redirect:search";
+    @DeleteMapping("{id}")
+    public boolean delete(@PathVariable Integer id) {
+        return sysRoleService.delete(id);
     }
 }

@@ -1,31 +1,7 @@
 <template>
     <div id="container">
         <el-row>
-            <el-form :inline="true" :model="form" class="demo-form-inline">
-                <el-form-item>
-                    <el-input v-model="form.number" placeholder="编号"></el-input>
-                </el-form-item>
-                <el-form-item>
-                    <el-input v-model="form.name" placeholder="姓名"></el-input>
-                </el-form-item>
-                <el-form-item style="width:120px">
-                    <el-select v-model="form.gender" placeholder="性别">
-                        <el-option label="男" value="男"></el-option>
-                        <el-option label="女" value="女"></el-option>
-                    </el-select>
-                </el-form-item>
-                <el-form-item>
-                    <el-input v-model="form.age" placeholder="年龄"></el-input>
-                </el-form-item>
-                <el-form-item>
-                    <el-select v-model="form['dep.id']" placeholder="部门">
-                        <el-option v-for="dep in depList" :key="dep.id" :label="dep.name" :value="dep.id"></el-option>
-                    </el-select>
-                </el-form-item>
-                <el-form-item>
-                    <el-button type="primary" @click="search">查询</el-button>
-                </el-form-item>
-            </el-form>
+            <Search @search="search"/>
         </el-row>
         <el-row>
             <el-table
@@ -63,41 +39,35 @@
         </el-row>
         <el-row style="margin-top:10px;text-align: left">
             <el-button type="primary" v-on:click="showAdd">新增</el-button>
-            <el-button type="warning" v-on:click="showUpdate">修改</el-button>
-            <el-button type="danger" v-on:click="deleteData">删除</el-button>
+            <el-button type="primary" v-on:click="showUpdate">修改</el-button>
+            <el-button type="primary" v-on:click="deleteData">删除</el-button>
         </el-row>
+        <AddOrUpdate  ref="AddOrUpdate" @search="search"></AddOrUpdate>
     </div>
 </template>
 
 
 <script>
+    import Search from '@/components/employee/Search.vue';
+    import AddOrUpdate from '@/components/employee/AddOrUpdate.vue';
+
     export default {
-        name: "Show",
+        name: "Employee",
+        components: {
+            AddOrUpdate,
+            Search
+        },
         data() {
             return {
                 selectedId: -1,
-                form: {
-                    number: null,
-                    name: null,
-                    gender: "",
-                    age: null,
-                    'dep.id': ""
-                },
                 list: [],
-                depList: []
             }
         },
         methods: {
-            search: function () {
-                this.axios.get('/emp', {params: this.form})
+            search: function (searchForm) {
+                this.axios.get('/emp', {params: searchForm})
                     .then(function (res) {
                         this.list = res.data;
-                    }.bind(this))
-            },
-            searchDep: function () {
-                this.axios.get('/dep')
-                    .then(function (res) {
-                        this.depList = res.data;
                     }.bind(this))
             },
             selectTr: function (obj) {
@@ -105,11 +75,16 @@
 
             },
             showAdd: function () {
-                this.$router.push({name: "EmpAdd"})
+                this.$refs.AddOrUpdate.dialogVisible = true;
+                this.$refs.AddOrUpdate.type = true;
+
             },
             showUpdate: function () {
                 if (this.selectedId > -1) {
-                    this.$router.push({name: "EmpUpdate", params: {id: this.selectedId}})
+                    this.$refs.AddOrUpdate.dialogVisible = true;
+                    this.$refs.AddOrUpdate.type = false;
+                    this.$refs.AddOrUpdate.selectedId= this.selectedId;
+                    this.$refs.AddOrUpdate.init();
                 } else {
                     this.$alert('请选中数据', '警告', {
                         confirmButtonText: '确定',
@@ -135,12 +110,10 @@
                 } else {
                     alert("请选中数据");
                 }
-            }
+            },
         },
         created() {
             this.search();
-            this.searchDep();
-
         }
     }
 </script>

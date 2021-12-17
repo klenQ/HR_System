@@ -31,7 +31,7 @@
             <el-table
                     :data="list"
                     border
-                    style="width: 100%" highlight-current-row @current-change="selectTr"
+                    style="width: 100%" highlight-current-row  @current-change="selectTr"
             >
                 <el-table-column
                         prop="number"
@@ -63,8 +63,8 @@
         </el-row>
         <el-row style="margin-top:10px;text-align: left">
             <el-button type="primary" v-on:click="showAdd">新增</el-button>
-            <el-button type="warning" v-on:click="showUpdate">修改</el-button>
-            <el-button type="danger" v-on:click="deleteData">删除</el-button>
+            <el-button type="primary" v-on:click="showUpdate">修改</el-button>
+            <el-button type="primary" v-on:click="deleteData">删除</el-button>
         </el-row>
     </div>
 </template>
@@ -72,7 +72,7 @@
 
 <script>
     export default {
-        name: "Show",
+        name: "Employee",
         data() {
             return {
                 selectedId: -1,
@@ -116,11 +116,10 @@
                         callback: action => {
                             this.$message({
                                 type: 'info',
-                                message: `action: ${action}`
+                                message: `action: ${ action }`
                             });
                         }
-                    });
-                }
+                    });                }
             },
             deleteData: function () {
                 if (this.selectedId > -1) {
@@ -128,7 +127,7 @@
                         .then(function (res) {
                             if (res.data == true) {
                                 this.search();
-                            } else {
+                            }else {
                                 alert("系统错误");
                             }
                         }.bind(this))

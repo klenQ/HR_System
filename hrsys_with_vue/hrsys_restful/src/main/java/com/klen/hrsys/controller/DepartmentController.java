@@ -1,62 +1,46 @@
 package com.klen.hrsys.controller;
 
 import com.klen.hrsys.entity.Department;
+import com.klen.hrsys.entity.Employee;
 import com.klen.hrsys.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("dep")
 public class DepartmentController {
 
     @Autowired
     DepartmentService depService;
 
-    @RequestMapping("search")
-    @ResponseBody
+    @GetMapping("{id}")
+    public Department search(@PathVariable Integer id) {
+        return depService.searchById(id);
+    }
+    @GetMapping
     public List<Department> search() {
-
-
         return depService.search();
+    }
+
+    @PostMapping
+    public boolean add(@RequestBody Department dep) {
+        return depService.add(dep);
 
     }
 
-    @RequestMapping("showAdd")
-    public String showAdd() {
-        return "dep/add";
+
+    @PutMapping
+    public boolean update(@RequestBody Department dep) {
+        return depService.update(dep);
 
     }
 
-    @RequestMapping("add")
-    public String add(Department dep) {
-        boolean flag = depService.add(dep);
-        return "redirect:search";
-
-    }
-
-    @RequestMapping("showUpdate")
-    public ModelAndView showUpdat(Integer id) {
-        ModelAndView mv = new ModelAndView("dep/update");
-        Department dep = depService.searchById(id);
-        mv.addObject("dep", dep);
-        return mv;
-
-    }
-
-    @RequestMapping("update")
-    public String update(Department dep) {
-        boolean flag = depService.update(dep);
-        return "redirect:search";
-    }
-
-    @RequestMapping("delete")
-    public String delete(Integer id) {
-        boolean flag = depService.delete(id);
-        return "redirect:search";
+    @DeleteMapping("{id}")
+    public boolean delete(@PathVariable Integer id) {
+        return depService.delete(id);
     }
 }
