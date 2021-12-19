@@ -14,11 +14,13 @@
         <module name="hrsys_ssm_ajax" />
         <module name="hrsys_security1" />
         <module name="hrsys_thymeleaf" />
-        <module name="hrsys_ssm" />
         <module name="hrsys_ssm_iframe" />
         <module name="hrsys_springboot" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="hrsys_ssm" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">

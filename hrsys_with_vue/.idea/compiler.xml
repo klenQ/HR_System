@@ -11,12 +11,14 @@
         <module name="hrsys_swagger" />
         <module name="hrsys_with_vue" />
         <module name="hrsys_spring_rest_docs" />
+        <module name="hrsys_restful_security" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="hrsys_restful" options="-parameters" />
+      <module name="hrsys_restful_security" options="-parameters" />
       <module name="hrsys_spring_rest_docs" options="-parameters" />
       <module name="hrsys_swagger" options="-parameters" />
       <module name="hrsys_vue" options="-parameters" />
