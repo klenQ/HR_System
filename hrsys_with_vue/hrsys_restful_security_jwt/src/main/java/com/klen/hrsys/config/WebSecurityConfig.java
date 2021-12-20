@@ -1,5 +1,8 @@
 package com.klen.hrsys.config;
 
+import com.klen.hrsys.jwt.JwtAuthenticationTokenFilter;
+import com.klen.hrsys.jwt.JwtLoginFailureHandler;
+import com.klen.hrsys.jwt.JwtLoginSuccessHandler;
 import com.klen.hrsys.service.impl.UserDetailsServiceImpl;
 import com.klen.hrsys.util.ServerResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -13,6 +16,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,7 +24,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.firewall.HttpFirewall;
 import org.springframework.security.web.firewall.StrictHttpFirewall;
 
@@ -40,7 +44,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private PasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @Autowired
-    private LogoutSuccessHandler logoutSuccessHandler;
+    private JwtLoginSuccessHandler jwtLoginSuccessHandler;
+    @Autowired
+    private JwtLoginFailureHandler jwtLoginFailureHandler;
 
     // 加入自定义的安全认证:数据库用户
     @Override
@@ -51,27 +57,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     //方法注解方式
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin()
-                //.loginPage("/login")
+        JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter = new JwtAuthenticationTokenFilter();
+
+        http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class)
+                .formLogin()
                 .loginProcessingUrl("/doLogin")
-                .successHandler(new AuthenticationSuccessHandler() {
-                    @Override
-                    public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
-                        printCode(httpServletResponse, 1);
-                    }
-                })
-                .failureHandler(new AuthenticationFailureHandler() {
-                    @Override
-                    public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
-                        printCode(httpServletResponse, 2);
-                    }
-                })
+                .successHandler(jwtLoginSuccessHandler)
+                .failureHandler(jwtLoginFailureHandler)
                 .permitAll()
                 .and()
-                .logout().logoutSuccessHandler(logoutSuccessHandler).permitAll()
+                .logout().permitAll()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/sysUser/currentUser").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().accessDeniedHandler(new AccessDeniedHandler() {
@@ -82,7 +79,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 })
                 .and().headers().frameOptions().sameOrigin()
                 // .and().cors()
-                .and().csrf().disable();
+                .and().cors()
+                .and().csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
     @Override

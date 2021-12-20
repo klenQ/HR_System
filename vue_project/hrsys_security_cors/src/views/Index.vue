@@ -113,7 +113,7 @@ export default {
       this.selectedTab = this.tabs[0];
     },
     logout() {
-      this.axios.get(this.tools.serverAddr+'/logout')
+      this.axios.post(this.tools.serverAddr+'logout')
           .then(function () {
             this.$message({
               message: "注销成功",

@@ -20,7 +20,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.firewall.HttpFirewall;
 import org.springframework.security.web.firewall.StrictHttpFirewall;
 
@@ -39,8 +38,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsServiceImpl userDetailsService;
     private PasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    @Autowired
-    private LogoutSuccessHandler logoutSuccessHandler;
 
     // 加入自定义的安全认证:数据库用户
     @Override
@@ -52,7 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin()
-                //.loginPage("/login")
+                .loginPage("/login")
                 .loginProcessingUrl("/doLogin")
                 .successHandler(new AuthenticationSuccessHandler() {
                     @Override
@@ -68,10 +65,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 })
                 .permitAll()
                 .and()
-                .logout().logoutSuccessHandler(logoutSuccessHandler).permitAll()
+                .logout().permitAll()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/sysUser/currentUser").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().accessDeniedHandler(new AccessDeniedHandler() {
@@ -82,6 +78,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 })
                 .and().headers().frameOptions().sameOrigin()
                 // .and().cors()
+                .and().cors()
                 .and().csrf().disable();
     }
 

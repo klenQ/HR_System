@@ -11,6 +11,8 @@
         <option value="$PROJECT_DIR$/hrsys_swagger/pom.xml" />
         <option value="$PROJECT_DIR$/hrsys_restful_sercurity/pom.xml" />
         <option value="$PROJECT_DIR$/hrsys_restful_security/pom.xml" />
+        <option value="$PROJECT_DIR$/hrsys_restful_security_cors/pom.xml" />
+        <option value="$PROJECT_DIR$/hrsys_restful_security_jwt/pom.xml" />
       </list>
     </option>
   </component>
