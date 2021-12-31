@@ -1,6 +1,7 @@
 package com.klen.hrsys.service;
 
 import com.klen.hrsys.entity.Employee;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  * @CreateTime: 2021/11/16
  */
 public interface EmployeeService {
-    List<Employee> search(Employee condition);
+    Page<Employee> search(Employee condition, Integer page, Integer size);
 
     Employee searchById(Integer id);
 

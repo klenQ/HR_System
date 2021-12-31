@@ -171,7 +171,7 @@ export default {
 
       this.axios.get(this.tools.serverAddr + 'emp', {params: this.searchForm})
           .then(function (res) {
-            this.list = res.data; // 原提供代码此处有误
+            this.list = res.data.data; // 原提供代码此处有误
             this.pagination.total = res.data.total;
 
           }.bind(this))

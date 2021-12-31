@@ -4,6 +4,8 @@ import com.klen.hrsys.dao.EmployeeDao;
 import com.klen.hrsys.entity.Employee;
 import com.klen.hrsys.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -26,8 +28,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     EmployeeDao empDao;
 
     @Override
-    public List<Employee> search(Employee condition) {
-        List<Employee> list = null;
+    public Page<Employee> search(Employee condition, Integer page, Integer size) {
+        PageRequest pageRequest = PageRequest.of(page-1,size);
+
 
         Specification specification = new Specification() {
             @Override
@@ -61,8 +64,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
             }
         };
-        list = empDao.findAll(specification);
-        return list;
+
+
+        Page<Employee> emps = empDao.findAll(specification, pageRequest);
+        return emps;
     }
 
     @Override

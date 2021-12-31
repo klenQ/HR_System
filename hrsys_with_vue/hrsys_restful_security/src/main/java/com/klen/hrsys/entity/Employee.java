@@ -1,6 +1,15 @@
 package com.klen.hrsys.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
+import org.hibernate.Hibernate;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.Objects;
 
 /**
  * @Description:
@@ -10,6 +19,11 @@ import javax.persistence.*;
 
 @Entity
 @Table
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,68 +36,18 @@ public class Employee {
     private String gender;
     @Column
     private int age;
+    @JsonIgnore
+    @Column(updatable = false)
+    @CreatedDate
+    private Timestamp createTime;
+    @JsonIgnore
+    @Column
+    @LastModifiedDate
+    private Timestamp modifyTime;
 
     @ManyToOne
     @JoinColumn(name = "dep_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
     private Department dep;
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public Department getDep() {
-        return dep;
-    }
-
-    public void setDep(Department dep) {
-        this.dep = dep;
-    }
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", number=" + number +
-                ", name='" + name + '\'' +
-                ", gender='" + gender + '\'' +
-                ", age=" + age +
-                ", dep=" + dep +
-                '}';
-    }
 }

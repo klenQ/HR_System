@@ -28,6 +28,16 @@
                                :value="dep.id"></el-option>
                 </el-select>
             </el-form-item>
+            <el-form-item label="照片">
+                <el-upload
+                    class="avatar-uploader"
+                    :action="uploadAddr"
+                    :show-file-list="true"
+                    :on-success="uploadSuccess" name="photo">
+                    <img v-if="form.photoName" :src="form.photoName" class="avatar">
+                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                </el-upload>
+            </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="save">保存</el-button>
             </el-form-item>
@@ -115,6 +125,9 @@
 
                         }
                     }.bind(this))
+            },
+            uploadSuccess(res, file) {
+                this.form.photoName = URL.createObjectURL(file.raw);
             },
             clearData: function () {
                 this.dialogVisible = false;

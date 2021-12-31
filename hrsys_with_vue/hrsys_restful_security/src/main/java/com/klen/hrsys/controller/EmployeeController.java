@@ -4,7 +4,9 @@ import com.klen.hrsys.entity.Employee;
 import com.klen.hrsys.service.DepartmentService;
 import com.klen.hrsys.service.EmployeeService;
 
+import com.klen.hrsys.util.ServerResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,9 +22,11 @@ public class EmployeeController {
 
 
     @GetMapping
-    public List<Employee> search(@RequestBody(required = false) Employee condition) {
+    public ServerResponse<List<Employee>> search(@RequestBody(required = false) Employee condition, Integer page, Integer size) {
         System.out.println(condition);
-        return empService.search(condition);
+        Page<Employee> emps = empService.search(condition, page, size);
+        ServerResponse<List<Employee>> sr = new ServerResponse<>(emps.getTotalElements(),emps.toList());
+        return sr;
     }
 
     @GetMapping("/{id}")
