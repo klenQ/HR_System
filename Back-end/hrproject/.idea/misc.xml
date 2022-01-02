@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/hrsys_ssm" />
+    <file type="web" url="file://$PROJECT_DIR$/hrsys_ssm_ajax" />
+    <file type="web" url="file://$PROJECT_DIR$/hrsys_ssm_iframe" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/hrsys_ssm_iframe/pom.xml" />
+        <option value="$PROJECT_DIR$/hrsys_ssm_ajax/pom.xml" />
+        <option value="$PROJECT_DIR$/hrsys_springboot/pom.xml" />
+        <option value="$PROJECT_DIR$/hrsys_thymeleaf/pom.xml" />
+        <option value="$PROJECT_DIR$/hrsys_jpa/pom.xml" />
+        <option value="$PROJECT_DIR$/hrsys_cache_redis/pom.xml" />
+        <option value="$PROJECT_DIR$/hrsys_restful_security/pom.xml" />
+        <option value="$PROJECT_DIR$/hrsys_security1/pom.xml" />
+        <option value="$PROJECT_DIR$/hrsys_security/pom.xml" />
+        <option value="$PROJECT_DIR$/hrsys_security2/pom.xml" />
+        <option value="$PROJECT_DIR$/hrsys_security3/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/hrsys_ssm/pom.xml" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

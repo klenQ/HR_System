@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="hrsys_cache_redis" />
+        <module name="hrsys_security" />
+        <module name="hrsys_jpa" />
+        <module name="hrsys_security3" />
+        <module name="hrsys_security2" />
+        <module name="hrsys_ssm_ajax" />
+        <module name="hrsys_security1" />
+        <module name="hrsys_thymeleaf" />
+        <module name="hrsys_ssm_iframe" />
+        <module name="hrsys_springboot" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="hrsys_ssm" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="hrsys_cache_redis" options="-parameters" />
+      <module name="hrsys_jpa" options="-parameters" />
+      <module name="hrsys_security" options="-parameters" />
+      <module name="hrsys_security1" options="-parameters" />
+      <module name="hrsys_security2" options="-parameters" />
+      <module name="hrsys_security3" options="-parameters" />
+      <module name="hrsys_springboot" options="-parameters" />
+      <module name="hrsys_thymeleaf" options="-parameters" />
+    </option>
+  </component>
+</project>

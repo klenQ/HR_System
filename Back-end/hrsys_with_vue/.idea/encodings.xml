@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/hrsys_restful/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hrsys_restful_security/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hrsys_restful_security/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hrsys_restful_security_cors/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hrsys_restful_security_jwt/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hrsys_spring_rest_docs/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hrsys_spring_rest_docs/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hrsys_swagger/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hrsys_swagger/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hrsys_vue/src/main/java" charset="UTF-8" />
+  </component>
+</project>
